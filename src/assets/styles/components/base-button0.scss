@@ -1,0 +1,299 @@
+@use "sass:color";
+@import "../assets/styles/global/mixins.scss";
+
+/**
+ * The buttons are built to be customisable, via overriding the following maps:
+ *
+ * $button-theme-names - The names of the colour themes available to buttons. Should start with two dashes.
+ * $button-type-theme-maps - The names of the possible button types, and the maps that should be used for their themes.
+ * $button-size-map - The possible button sizes.
+ * $button-default-styles - The default button styles to apply to all buttons.
+ */
+
+
+$button-padding-map:(
+'--tiny' : (
+'font-size': 80%,
+'x' : .225rem,
+'y' : .225rem,
+),
+'--small' : (
+font-size: 90%,
+'x' : .5rem,
+'y' : .5rem,
+),
+'--large' : (
+'font-size': 110%,
+'x' : 1rem,
+'y' : 1rem,
+),
+'--huge' : (
+'font-size': 120%,
+'x' : 1.25rem,
+'y' : 1.25rem,
+),
+'--massive' : (
+'font-size': 350%,
+'x' : 1.5rem,
+'y' : 1.5rem,
+)
+) !default;
+
+
+$button-size-map: (
+
+null: (
+   padding: 1rem,
+ ),
+ '--tiny': (
+   font-size: 80%,
+   padding-left: 0.225rem,
+   padding-right: 0.225rem,
+    padding-top: 0.225rem,
+     padding-bottom: 0.225rem,
+ ),
+ '--small': (
+   font-size: 90%,
+    padding-left: 0.5rem,
+     padding-right: 0.225rem,
+      padding-top: 0.225rem,
+       padding-bottom: 0.225rem,
+ ),
+ '--large': (
+   font-size: 110%,
+    padding-left: 1.5rem,
+    padding-right: 1.5rem,
+    padding-top: 1.5rem,
+    padding-bottom: 1.5rem,
+ ),
+ '--huge': (
+   font-size: 120%,
+   padding-left: 2rem,
+   padding-right: 2rem,
+   padding-top: 2rem,
+   padding-bottom: 2rem,
+ ),
+
+  '--massive' : (
+    font-size: 450%,
+     padding-left: 1.5rem,
+     padding-right: 1.5rem,
+     padding-top: 1.5rem,
+     padding-bottom: 1.5rem,
+  ),
+) !default;
+
+$button-theme-names: ('--primary', '--secondary', '--white', '--black') !default;
+$default-theme-map: (
+  'all': (
+
+
+
+    'disabled': (
+      opacity: 0.5,
+    ),
+  ),
+  '--primary': (
+    'styles': (
+      background-color: var(--v-primary-base),
+      color: white,
+
+    ),
+    'hover': (
+      //background-color: lighten($primary, 10%),
+      //border-color: lighten(blue, 10%),
+    ),
+  ),
+  '--secondary': (
+    'styles': (
+      background-color: var(--v-secondary-base),
+      color: white,
+    ),
+    'hover': (
+      //background-color: lighten(color('secondary'), 10%),
+      //border-color: lighten(color('secondary'), 10%),
+    ),
+  ),
+  '--white': (
+    'styles': (
+      background-color: white,
+      border: 1px solid var(--v-primary-base),
+      color: var(--v-primary-base),
+    ),
+    'hover': (
+      //background-color: darken(color('white'), 5%),
+      //border-color: darken(color('white'), 5%),
+    ),
+  ),
+  '--black': (
+    'styles': (
+      background-color: black,
+      color: white,
+    ),
+    'hover': (
+      //background-color: lighten(color('black'), 15%),
+      //border-color: lighten(color('black'), 15%),
+    ),
+  ),
+) !default;
+$outline-theme-map: (
+  'all': (
+    'styles': (
+      background-color: white,
+    ),
+    'disabled': (
+      opacity: 0.5,
+    ),
+  ),
+  '--primary': (
+    'styles': (
+      color: var(--v-primary-base),
+      border : 3px solid var(--v-primary-base),
+    ),
+    'hover': map-deep-get($default-theme-map, '--primary', 'styles'),
+  ),
+  '--secondary': (
+    'styles': (
+      color: var(--v-secondary-base),
+      border : 3px solid var(--v-secondary-base),
+    ),
+    'hover': map-deep-get($default-theme-map, '--secondary', 'styles'),
+  ),
+  '--white': (
+    'styles': (
+      color: white,
+      border : 3px solid white,
+    ),
+    'hover': map-deep-get($default-theme-map, '--white', 'styles'),
+  ),
+  '--black': (
+    'styles': (
+      color: black,
+      border : 3px solid black,
+    ),
+    'hover': map-deep-get($default-theme-map, '--black', 'styles'),
+  ),
+) !default;
+$text-theme-map: (
+  'all': (
+    'styles': (
+      background: none,
+      border: none,
+    ),
+    'disabled': (
+      opacity: 0.5,
+    ),
+  ),
+  '--primary': (
+    'styles': (
+      color: var(--v-primary-base),
+    ),
+    'hover': (
+      background-color: color('white-two'),
+    ),
+  ),
+  '--secondary': (
+    'styles': (
+      color: color('secondary'),
+    ),
+    'hover': (
+      background-color: color('white-two'),
+    ),
+  ),
+  '--white': (
+    'styles': (
+      color: color('white'),
+    ),
+    'hover': (
+      background-color: color('white-two'),
+    ),
+  ),
+  '--black': (
+    'styles': (
+      color: color('black'),
+    ),
+    'hover': (
+      background-color: color('white-two'),
+    ),
+  ),
+) !default;
+$button-type-theme-maps: (
+  null: $default-theme-map,
+  '--outlined': $outline-theme-map,
+  '--text': $text-theme-map,
+) !default;
+$button-default-styles: (
+  border: 1px solid transparent,
+  border-radius: 10px,
+  outline: none,
+  font-family : 'Bebas Neue',
+  letter-spacing : 0,
+  text-decoration : none,
+) !default;
+.v-btn {
+  cursor: pointer;
+  @include styles-from-map($button-default-styles);
+}
+.v-btn--block {
+  display: block;
+  width: 100%;
+}
+.v-btn--disabled {
+  cursor: not-allowed;
+}
+.v-btn--loading {
+  pointer-events: none;
+  position: relative;
+  .v-btn__slot {
+    color: transparent;
+  }
+  &::after {
+    animation: animSpin 0.5s infinite linear;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    border-right-color: transparent;
+    border-top-color: transparent;
+    content: '';
+    display: block;
+    height: 1em;
+    left: calc(50% - 0.5em);
+    position: absolute;
+    top: calc(50% - 0.5em);
+    width: 1em;
+  }
+}
+/** Sizes */
+@each $size-name, $style-map in $button-size-map {
+  .v-btn#{$size-name} {
+    @debug $size-name;
+    $size-variables : map-get($button-padding-map, $size-name);
+    @debug $size-variables;
+    @debug map-get($size-variables, 'x');
+    padding-left: map-get($size-variables, 'x');
+    padding-right: map-get($size-variables, 'x');
+    padding-top: map-get($size-variables, 'y');
+    padding-bottom: map-get($size-variables, 'y');
+    font-size : map-get($size-variables, 'font-size');
+
+  }
+}
+@each $type-name, $theme-map in $button-type-theme-maps {
+  $all: ();
+  @if map-has-key($theme-map, 'all') {
+    $all: map-get($theme-map, 'all');
+  }
+  .v-btn#{$type-name} {
+    @each $theme-name in $button-theme-names {
+      $theme: recursive-map-merge($all, map-get($theme-map, $theme-name));
+      &.v-btn#{$theme-name} {
+        @include styles-from-map-quietly(map-get($theme, 'styles'));
+        &:hover:not(.v-btn--disabled) {
+          @include styles-from-map-quietly(map-get($theme, 'hover'));
+        }
+        &.v-btn--disabled {
+          @include styles-from-map-quietly(map-get($theme, 'disabled'));
+        }
+      }
+    }
+  }
+}

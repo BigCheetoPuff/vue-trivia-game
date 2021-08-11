@@ -1,0 +1,24 @@
+.icon-col{
+
+margin-left:50px;
+margin-right:50px;
+
+}
+
+.slide-left-enter-active, .slide-right-enter-active{
+  transition: opacity 1s, transform 1s;
+}
+
+.slide-left-leave-active, .slide-right-leave-active{
+  transition: opacity .5s, transform .5s;
+}
+
+.slide-left-enter , .slide-right-leave-to{
+  opacity : 0;
+  transform: translateX(100px);
+}
+
+.slide-left-leave-to , .slide-right-enter{
+  opacity : 0;
+  transform: translateX(-100px);
+}
